@@ -1,17 +1,29 @@
 import Client from './client';
 
 export default {
-  getFrontPage() {
-    return Client.get('/').then(resp => resp.data);
-  },
-  getSubreddit(subreddit, mode) {
-    let url = `/r/${subreddit}`;
+  getSubreddit(subreddit, mode, after) {
+    let url;
+
+    if (typeof (subreddit) !== 'undefined' && subreddit.length > 0) {
+      url = `/r/${subreddit}/`;
+    } else {
+      // assume frontpage
+      url = '/';
+    }
 
     if (typeof (mode) !== 'undefined') {
       url += mode;
     }
 
-    return Client.get(url).then(resp => resp.data);
+    const params = {};
+
+    if (typeof (after) !== 'undefined') {
+      params.after = after;
+    }
+
+    return Client.get(url, {
+      params,
+    }).then(resp => resp.data);
   },
   getPostDetail(subreddit, id) {
     return Client.get(`/r/${subreddit}/comments/${id}`).then(resp => ({
