@@ -1,28 +1,27 @@
 import PostsTransformer from './transformers/posts';
+import Client from './client';
 
 const axios = require('axios');
 
 export default {
   getFrontPage() {
-    return axios.get('https://www.reddit.com/.json', {
+    return Client.get('/', {
       transformResponse: PostsTransformer,
     });
   },
   getSubreddit(subreddit, mode) {
-    let url = `https://www.reddit.com/r/${subreddit}`;
+    let url = `/r/${subreddit}`;
 
     if (typeof (mode) !== 'undefined') {
       url += mode;
     }
 
-    url += '.json';
-
-    return axios.get(url, {
+    return Client.get(url, {
       transformResponse: PostsTransformer,
     });
   },
   getPostDetail(subreddit, id) {
-    return axios.get(`https://www.reddit.com/r/${subreddit}/comments/${id}.json`, {
+    return Client.get(`/r/${subreddit}/comments/${id}`, {
       transformResponse: axios.defaults.transformResponse.concat(data => ({
         post: data[0].data.children[0].data,
         comments: data[1].data.children.map(item => item.data),
@@ -30,7 +29,7 @@ export default {
     });
   },
   getUserComments(username) {
-    return axios.get(`https://www.reddit.com/user/${username}/.json`, {
+    return Client.get(`/user/${username}/`, {
       transformResponse: axios.defaults.transformResponse.concat(data => data.data.children),
     });
   },
