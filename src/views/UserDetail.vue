@@ -5,8 +5,8 @@
       <h2 class="ui header" v-text="username"></h2>
       <div class="ui relaxed items comments">
         <template v-for="item in items">
-          <comment v-if="item.kind === 't1'" :comment="item.data" :key="item.data.id"></comment>
-          <post v-else :post="item.data" :key="item.data.id"></post>
+          <comment v-if="item.kind === 't1'" :comment="item" :key="item.id"></comment>
+          <post v-else :post="item" :key="item.id"></post>
         </template>
       </div>
     </div>
@@ -36,8 +36,9 @@ export default {
   methods: {
     view() {
       this.$root.$emit('loading', true);
-      Api.getUserComments(this.username).then((resp) => {
-        this.items = resp.data;
+      Api.getUserComments(this.username).then((data) => {
+        console.log(data);
+        this.items = data.children;
         this.$root.$emit('loading', false);
       });
     },

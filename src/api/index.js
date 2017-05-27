@@ -1,13 +1,8 @@
-import PostsTransformer from './transformers/posts';
 import Client from './client';
-
-const axios = require('axios');
 
 export default {
   getFrontPage() {
-    return Client.get('/', {
-      transformResponse: PostsTransformer,
-    });
+    return Client.get('/').then(resp => resp.data);
   },
   getSubreddit(subreddit, mode) {
     let url = `/r/${subreddit}`;
@@ -16,21 +11,15 @@ export default {
       url += mode;
     }
 
-    return Client.get(url, {
-      transformResponse: PostsTransformer,
-    });
+    return Client.get(url).then(resp => resp.data);
   },
   getPostDetail(subreddit, id) {
-    return Client.get(`/r/${subreddit}/comments/${id}`, {
-      transformResponse: axios.defaults.transformResponse.concat(data => ({
-        post: data[0].data.children[0].data,
-        comments: data[1].data.children.map(item => item.data),
-      })),
-    });
+    return Client.get(`/r/${subreddit}/comments/${id}`).then(resp => ({
+      post: resp.data[0].children[0],
+      comments: resp.data[1],
+    }));
   },
   getUserComments(username) {
-    return Client.get(`/user/${username}/`, {
-      transformResponse: axios.defaults.transformResponse.concat(data => data.data.children),
-    });
+    return Client.get(`/user/${username}/`).then(resp => resp.data);
   },
 };

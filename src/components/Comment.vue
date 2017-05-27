@@ -23,11 +23,11 @@ export default {
     replies() {
       const replies = this.comment.replies;
 
-      if (replies.length <= 0) {
+      if (typeof (replies) === 'undefined') {
         return [];
       }
 
-      return replies.data.children.filter(item => item.kind !== 'more').map(item => item.data);
+      return replies.children;
     },
     relativeTime() {
       return moment.unix(this.comment.created_utc).fromNow();

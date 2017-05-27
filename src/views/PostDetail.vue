@@ -42,9 +42,9 @@ export default {
   },
   mounted() {
     this.$root.$emit('loading', true);
-    Api.getPostDetail(this.subreddit, this.id).then((resp) => {
-      this.post = resp.data.post;
-      this.comments = resp.data.comments;
+    Api.getPostDetail(this.subreddit, this.id).then((data) => {
+      this.post = data.post;
+      this.comments = data.comments.children;
       this.$root.$emit('loading', false);
     });
   },

@@ -1,3 +1,5 @@
+import Transformer from './transformers';
+
 const axios = require('axios');
 
 // const env = process.env;
@@ -7,6 +9,7 @@ const axios = require('axios');
 
 const client = axios.create({
   baseURL: 'https://www.reddit.com/',
+  transformResponse: Transformer,
 });
 
 client.interceptors.request.use((req) => {

@@ -40,8 +40,8 @@ export default {
         promise = Api.getSubreddit(this.subreddit);
       }
 
-      promise.then((resp) => {
-        this.posts = resp.data;
+      promise.then((data) => {
+        this.posts = data.children;
         this.$root.$emit('loading', false);
       });
     },
