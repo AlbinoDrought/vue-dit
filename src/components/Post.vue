@@ -1,8 +1,10 @@
 <template>
   <div class="item">
-    <div class="ui tiny rounded image">
-      <img v-if="hasThumbnail" :src="post.thumbnail">
-    </div>
+      <div class="ui tiny rounded image">
+        <transition name="fade" appear>
+          <img v-if="hasThumbnail" :src="post.thumbnail">
+        </transition>
+      </div>
     <div class="middle aligned content">
       <router-link v-if="post.is_self" class="header" :to="commentLink" v-text="post.title"></router-link>
       <a v-else class="header" :href="post.url" target="_blank" v-text="post.title"></a>
