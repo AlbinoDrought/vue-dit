@@ -1,31 +1,26 @@
 <template>
-  <div>
-    <header-menu></header-menu>
-    <div class="ui main container">
-      <div class="ui items">
-        <post :post="post"></post>
-      </div>
-      
-      <div v-if="comments.length > 0" class="ui comments">
-        <h3 class="ui dividing header">Comments</h3>
-        <comment v-for="comment in comments" :comment="comment" :key="comment.id"></comment>
-      </div>
-      <div v-else class="ui message">
-        <p>No comments found.</p>
-      </div>
+  <div class="ui main container">
+    <div class="ui items">
+      <post :post="post"></post>
+    </div>
+    
+    <div v-if="comments.length > 0" class="ui comments">
+      <h3 class="ui dividing header">Comments</h3>
+      <comment v-for="comment in comments" :comment="comment" :key="comment.id"></comment>
+    </div>
+    <div v-else class="ui message">
+      <p>No comments found.</p>
     </div>
   </div>
 </template>
 
 <script>
 import Api from '@/api';
-import HeaderMenu from '@/components/HeaderMenu';
 import Post from '@/components/Post';
 import Comment from '@/components/Comment';
 
 export default {
   components: {
-    HeaderMenu,
     Comment,
     Post,
   },

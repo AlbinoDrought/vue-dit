@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <header-menu></header-menu>
+    <transition name="fade">
+      <router-view :key="$route.path"></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
+import HeaderMenu from '@/components/HeaderMenu';
+
 export default {
   name: 'app',
-  methods: {
-    loading(status) {
-      this.$emit('loading', status);
-    },
+  components: {
+    HeaderMenu,
   },
 };
 </script>
