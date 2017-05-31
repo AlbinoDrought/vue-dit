@@ -1,4 +1,5 @@
-import Client from './client';
+// import Client from './client';
+import CachedClient from './cachedClient';
 
 export default {
   getSubreddit(subreddit, mode, after) {
@@ -21,17 +22,18 @@ export default {
       params.after = after;
     }
 
-    return Client.get(url, {
+    return CachedClient.get(url, {
       params,
+      ttl: 30,
     }).then(resp => resp.data);
   },
   getPostDetail(subreddit, id) {
-    return Client.get(`/r/${subreddit}/comments/${id}`).then(resp => ({
+    return CachedClient.get(`/r/${subreddit}/comments/${id}`, { ttl: 60 }).then(resp => ({
       post: resp.data[0].children[0],
       comments: resp.data[1],
     }));
   },
   getUserComments(username) {
-    return Client.get(`/user/${username}/`).then(resp => resp.data);
+    return CachedClient.get(`/user/${username}/`, { ttl: 120 }).then(resp => resp.data);
   },
 };

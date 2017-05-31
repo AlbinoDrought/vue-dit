@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "cachios": "^1.0.2",
     "marked": "^0.3.6",
     "moment": "^2.18.1",
     "semantic-ui-css": "^2.2.10",
