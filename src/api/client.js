@@ -1,6 +1,5 @@
+import axios from 'axios';
 import Transformer from './transformers';
-
-const axios = require('axios');
 
 // const env = process.env;
 // <platform>:<app ID>:<version string> (by /u/<reddit username>)
