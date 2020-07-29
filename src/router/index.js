@@ -8,7 +8,7 @@ import UserDetail from '@/views/UserDetail.vue';
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: process.env.VUE_APP_ROUTING_MODE || 'history',
   routes: [
     {
       path: '/',
