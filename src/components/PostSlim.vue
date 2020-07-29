@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="post item">
       <div class="ui tiny rounded image">
         <transition name="fade" appear>
           <img :src="thumbnail">
@@ -51,7 +51,7 @@ export default {
         : placeholderThumbnail;
     },
     showSelfText() {
-      return this.post && this.post.selftext && (!this.expandable || this.expanded);
+      return this.post && this.post.selftext && this.expanded;
     },
     commentLink() {
       return `/sub/${this.post.subreddit}/${this.post.id}`;
@@ -63,10 +63,6 @@ export default {
     };
   },
   props: {
-    expandable: {
-      type: Boolean,
-      default: false,
-    },
     post: {
       type: Object,
       default() {
@@ -104,7 +100,7 @@ export default {
 .readable.segment {
   color: black;
 }
-.ui.items > .item .meta > .meta.item * {
+.ui.items > .post.item .meta > .meta.item * {
   margin-right: 0;
 }
 </style>
