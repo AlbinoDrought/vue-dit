@@ -2,7 +2,7 @@
   <div class="comment">
     <div class="content">
       <a class="clickable fw-expando" @click="expanded = !expanded" v-text="expandoText"></a>
-      <router-link :to="'/user/' + comment.author" class="author" v-text="comment.author"></router-link>
+      <router-link :to="'/user/' + comment.author" class="author" v-text="comment.author" />
       <div class="metadata">
         <span class="time" v-text="relativeTime"></span>
       </div>
@@ -21,7 +21,7 @@ export default {
   name: 'comment',
   computed: {
     replies() {
-      const replies = this.comment.replies;
+      const { replies } = this.comment;
 
       if (typeof (replies) === 'undefined') {
         return [];

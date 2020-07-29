@@ -25,15 +25,15 @@ export default {
     return CachedClient.get(url, {
       params,
       ttl: 30,
-    }).then(resp => resp.data);
+    }).then((resp) => resp.data);
   },
   getPostDetail(subreddit, id) {
-    return CachedClient.get(`/r/${subreddit}/comments/${id}`, { ttl: 60 }).then(resp => ({
+    return CachedClient.get(`/r/${subreddit}/comments/${id}`, { ttl: 60 }).then((resp) => ({
       post: resp.data[0].children[0],
       comments: resp.data[1],
     }));
   },
   getUserComments(username) {
-    return CachedClient.get(`/user/${username}/`, { ttl: 120 }).then(resp => resp.data);
+    return CachedClient.get(`/user/${username}/`, { ttl: 120 }).then((resp) => resp.data);
   },
 };

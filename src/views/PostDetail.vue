@@ -3,7 +3,7 @@
     <div class="ui items">
       <post :post="post"></post>
     </div>
-    
+
     <div v-if="comments.length > 0" class="ui comments">
       <h3 class="ui dividing header">Comments</h3>
       <comment v-for="comment in comments" :comment="comment" :key="comment.id"></comment>
@@ -16,8 +16,8 @@
 
 <script>
 import Api from '@/api';
-import Post from '@/components/Post';
-import Comment from '@/components/Comment';
+import Post from '@/components/Post.vue';
+import Comment from '@/components/Comment.vue';
 
 export default {
   components: {

@@ -12,8 +12,8 @@
 
 <script>
 import Api from '@/api';
-import Post from '@/components/Post';
-import Comment from '@/components/Comment';
+import Post from '@/components/Post.vue';
+import Comment from '@/components/Comment.vue';
 
 export default {
   components: {
@@ -26,13 +26,12 @@ export default {
     };
   },
   props: {
-    username: '',
+    username: { type: String, required: true },
   },
   methods: {
     view() {
       this.$root.$emit('loading', true);
       Api.getUserComments(this.username).then((data) => {
-        console.log(data);
         this.items = data.children;
         this.$root.$emit('loading', false);
       });

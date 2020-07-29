@@ -6,11 +6,11 @@
         </transition>
       </div>
     <div class="middle aligned content">
-      <router-link v-if="post.is_self" class="header" :to="commentLink" v-text="post.title"></router-link>
+      <router-link v-if="post.is_self" class="header" :to="commentLink" v-text="post.title" />
       <a v-else class="header" :href="post.url" target="_blank" v-text="post.title"></a>
-      
+
       <div class="meta">
-        submitted 
+        submitted
         <span class="time" v-text="relativeTime"></span>
         by
         <router-link :to="'/user/' + post.author">
@@ -40,7 +40,7 @@ export default {
     hasThumbnail() {
       if (!this.post) return false;
 
-      const thumbnail = this.post.thumbnail;
+      const { thumbnail } = this.post;
 
       return thumbnail && thumbnail.indexOf('://') >= 0;
     },

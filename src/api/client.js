@@ -13,8 +13,9 @@ const client = axios.create({
 });
 
 client.interceptors.request.use((req) => {
-  req.url += '.json';
-  return req;
+  const interceptedReq = req;
+  interceptedReq.url += '.json';
+  return interceptedReq;
 });
 
 export default client;
