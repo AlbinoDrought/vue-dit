@@ -10,16 +10,18 @@
       <a v-else class="header" :href="post.url" target="_blank" v-text="post.title"></a>
 
       <div class="meta">
-        submitted
-        <span class="time" v-text="relativeTime"></span>
-        by
-        <router-link :to="'/user/' + post.author">
-          <span class="user" v-text="post.author"></span>
-        </router-link>
-        to
-        <router-link :to="'/sub/' + post.subreddit">
-          <span class="subreddit" v-text="post.subreddit"></span>
-        </router-link>
+        <span class="meta item">
+          submitted
+          <span class="time" v-text="relativeTime" />
+          by
+          <router-link :to="'/user/' + post.author">
+            <span class="user" v-text="post.author" />
+          </router-link>
+          to
+          <router-link :to="'/sub/' + post.subreddit">
+            <span class="subreddit" v-text="post.subreddit" />
+          </router-link>
+        </span>
       </div>
 
       <div class="extra" v-if="showSelfText">
@@ -116,5 +118,8 @@ export default {
 <style>
 .readable.segment {
   color: black;
+}
+.ui.items > .item .meta > .meta.item * {
+  margin-right: 0;
 }
 </style>
