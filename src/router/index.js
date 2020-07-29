@@ -19,22 +19,33 @@ export default new Router({
       },
     },
     {
+      name: 'sub',
       path: '/sub/:subreddit',
       component: Subreddit,
       props: true,
     },
     {
+      name: 'sub.post',
       path: '/sub/:subreddit/:id',
       component: PostDetail,
       props: true,
     },
     {
+      name: 'user',
       path: '/user/:username',
       component: UserDetail,
       props: true,
     },
   ],
-  scrollBehavior() {
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+
+    if (to.name && from.name && to.name === from.name) {
+      return undefined;
+    }
+
     return { x: 0, y: 0 };
   },
 });
