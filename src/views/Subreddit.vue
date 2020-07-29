@@ -1,7 +1,7 @@
 <template>
   <div class="ui main container">
     <div class="ui divided relaxed items">
-      <post v-for="post in posts" :post="post" :key="post.id"></post>
+      <post v-for="post in posts" :post="post" :key="post.id" :expandable="true" />
       <infinite-loading v-if="posts.length > 0" :on-infinite="onInfinite" ref="infiniteLoading" />
     </div>
   </div>

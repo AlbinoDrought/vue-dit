@@ -22,6 +22,12 @@
         </router-link>
       </div>
 
+      <div class="extra" v-if="showSelfText">
+        <div class="ui readable segment">
+          {{ post.selftext}}
+        </div>
+      </div>
+
       <div class="extra">
         <router-link :to="commentLink">
           {{ post.num_comments }} comments
@@ -51,6 +57,9 @@ export default {
         ? this.post.thumbnail
         : placeholderThumbnail;
     },
+    showSelfText() {
+      return this.post && this.post.selftext && (!this.expandable || this.expanded);
+    },
     relativeTime() {
       return moment.unix(this.post.created_utc).fromNow();
     },
@@ -61,7 +70,16 @@ export default {
       return `/sub/${this.post.subreddit}/${this.post.id}`;
     },
   },
+  data() {
+    return {
+      expanded: false,
+    };
+  },
   props: {
+    expandable: {
+      type: Boolean,
+      default: false,
+    },
     post: {
       type: Object,
       default() {
@@ -95,6 +113,8 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style>
+.readable.segment {
+  color: black;
+}
 </style>
