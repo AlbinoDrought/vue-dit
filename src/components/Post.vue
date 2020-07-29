@@ -2,7 +2,7 @@
   <div class="item">
       <div class="ui tiny rounded image">
         <transition name="fade" appear>
-          <img v-if="hasThumbnail" :src="post.thumbnail">
+          <img :src="thumbnail">
         </transition>
       </div>
     <div class="middle aligned content">
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import placeholderThumbnail from '@/assets/placeholder.png';
+
 const moment = require('moment');
 
 export default {
@@ -43,6 +45,11 @@ export default {
       const { thumbnail } = this.post;
 
       return thumbnail && thumbnail.indexOf('://') >= 0;
+    },
+    thumbnail() {
+      return this.hasThumbnail
+        ? this.post.thumbnail
+        : placeholderThumbnail;
     },
     relativeTime() {
       return moment.unix(this.post.created_utc).fromNow();
