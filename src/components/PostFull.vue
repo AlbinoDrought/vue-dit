@@ -10,18 +10,7 @@
       <a v-else class="header" :href="post.url" target="_blank" v-text="post.title"></a>
 
       <div class="meta">
-        <span class="meta item">
-          submitted
-          <span class="time" v-text="relativeTime" />
-          by
-          <router-link :to="'/user/' + post.author">
-            <span class="user" v-text="post.author" />
-          </router-link>
-          to
-          <router-link :to="'/sub/' + post.subreddit">
-            <span class="subreddit" v-text="post.subreddit" />
-          </router-link>
-        </span>
+        <post-submission-details class="meta item" :post="post" />
       </div>
 
       <div class="extra" v-if="showSelfText">
@@ -41,11 +30,13 @@
 
 <script>
 import placeholderThumbnail from '@/assets/placeholder.png';
-
-const moment = require('moment');
+import PostSubmissionDetails from './PostSubmissionDetails.vue';
 
 export default {
   name: 'post-full',
+  components: {
+    PostSubmissionDetails,
+  },
   computed: {
     hasThumbnail() {
       if (!this.post) return false;
@@ -61,12 +52,6 @@ export default {
     },
     showSelfText() {
       return this.post && this.post.selftext && (!this.expandable || this.expanded);
-    },
-    relativeTime() {
-      return moment.unix(this.post.created_utc).fromNow();
-    },
-    readableTime() {
-      return moment.unix(this.post.created_utc).format('MMMM Do YYYY, h:mm:ss a');
     },
     commentLink() {
       return `/sub/${this.post.subreddit}/${this.post.id}`;
