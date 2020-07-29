@@ -6,7 +6,7 @@
       <div class="metadata">
         <relative-time :unix="comment.created_utc" />
       </div>
-      <div v-if="expanded" class="text" v-text="comment.body" />
+      <markdown v-if="expanded" class="text" :markdown="comment.body" />
     </div>
     <div v-if="expanded && showChildren && replies.length > 0" class="comments">
       <comment v-for="reply in replies" :comment="reply" :key="reply.id" />
@@ -15,11 +15,13 @@
 </template>
 
 <script>
+import Markdown from './Markdown.vue';
 import RelativeTime from './RelativeTime.vue';
 
 export default {
   name: 'comment',
   components: {
+    Markdown,
     RelativeTime,
   },
   computed: {

@@ -14,9 +14,7 @@
       </div>
 
       <div class="extra" v-if="showSelfText">
-        <div class="ui readable segment">
-          {{ post.selftext}}
-        </div>
+        <markdown class="ui readable segment" :markdown="post.selftext" />
       </div>
 
       <div class="extra">
@@ -30,11 +28,13 @@
 
 <script>
 import placeholderThumbnail from '@/assets/placeholder.png';
+import Markdown from './Markdown.vue';
 import PostSubmissionDetails from './PostSubmissionDetails.vue';
 
 export default {
   name: 'post-slim',
   components: {
+    Markdown,
     PostSubmissionDetails,
   },
   computed: {
