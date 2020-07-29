@@ -75,4 +75,11 @@ export default {
 .fw-expando {
   padding-right: 5px;
 }
+
+.ui.comments .comment .comments {
+  /* prevent very large bottom margins from accumulating in deep comment chains */
+  padding-top: 0.5em;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
 </style>
