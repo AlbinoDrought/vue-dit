@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 function transformToInnerData(item) {
-  const data = item.data;
+  const { data } = item;
 
   data.kind = item.kind;
 
@@ -23,7 +23,7 @@ function transformComment(item, transformFunc) {
 
   // remove non-comment comments (more)
   if (Array.isArray(innerData.replies)) {
-    innerData.replies = innerData.repleis.filter(comment => comment.kind === 't1');
+    innerData.replies = innerData.repleis.filter((comment) => comment.kind === 't1');
   }
 
   return innerData;
@@ -47,9 +47,9 @@ function transform(data) {
 
   // some endpoints, like the comments section, will return multiple items.
   if (Array.isArray(data)) {
-    output = data.map(transform).filter(item => item !== null && typeof (item) !== 'undefined');
+    output = data.map(transform).filter((item) => item !== null && typeof (item) !== 'undefined');
   } else {
-    const kind = data.kind;
+    const { kind } = data;
     if (transformers[kind]) {
       output = transformers[kind](data, transform);
     } else {

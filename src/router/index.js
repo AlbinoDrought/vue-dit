@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Subreddit from '@/views/Subreddit';
-import PostDetail from '@/views/PostDetail';
-import UserDetail from '@/views/UserDetail';
+import Subreddit from '@/views/Subreddit.vue';
+import PostDetail from '@/views/PostDetail.vue';
+import UserDetail from '@/views/UserDetail.vue';
 
 Vue.use(Router);
 

@@ -2,7 +2,7 @@
   <div class="ui main container">
     <div class="ui divided relaxed items">
       <post v-for="post in posts" :post="post" :key="post.id"></post>
-      <infinite-loading v-if="posts.length > 0" :on-infinite="onInfinite" ref="infiniteLoading"></infinite-loading>
+      <infinite-loading v-if="posts.length > 0" :on-infinite="onInfinite" ref="infiniteLoading" />
     </div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
 import Api from '@/api';
-import Post from '@/components/Post';
+import Post from '@/components/Post.vue';
 
 export default {
   components: {
@@ -25,8 +25,8 @@ export default {
     };
   },
   props: {
-    subreddit: '',
-    isFrontPage: false,
+    subreddit: { type: String, default: '' },
+    isFrontPage: { type: Boolean, default: false },
   },
   methods: {
     view() {

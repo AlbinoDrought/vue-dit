@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import HeaderMenu from '@/components/HeaderMenu';
+import HeaderMenu from '@/components/HeaderMenu.vue';
 
 export default {
   name: 'app',
