@@ -1,7 +1,7 @@
 <template>
   <span>
     submitted
-    <span class="time" v-text="relativeTime" :title="readableTime" />
+    <relative-time :unix="post.created_utc" />
     by
     <router-link :to="'/user/' + post.author">
       <span class="user" v-text="post.author" />
@@ -14,16 +14,11 @@
 </template>
 
 <script>
-const moment = require('moment');
+import RelativeTime from './RelativeTime.vue';
 
 export default {
-  computed: {
-    relativeTime() {
-      return moment.unix(this.post.created_utc).fromNow();
-    },
-    readableTime() {
-      return moment.unix(this.post.created_utc).format('MMMM Do YYYY, h:mm:ss a');
-    },
+  components: {
+    RelativeTime,
   },
   props: {
     post: {

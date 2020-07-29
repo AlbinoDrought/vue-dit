@@ -1,24 +1,27 @@
 <template>
   <div class="comment">
     <div class="content">
-      <a class="clickable fw-expando" @click="expanded = !expanded" v-text="expandoText"></a>
+      <a class="clickable fw-expando" @click="expanded = !expanded" v-text="expandoText" />
       <router-link :to="'/user/' + comment.author" class="author" v-text="comment.author" />
       <div class="metadata">
-        <span class="time" v-text="relativeTime"></span>
+        <relative-time :unix="comment.created_utc" />
       </div>
-      <div v-if="expanded" class="text" v-text="comment.body"></div>
+      <div v-if="expanded" class="text" v-text="comment.body" />
     </div>
     <div v-if="expanded && showChildren && replies.length > 0" class="comments">
-      <comment v-for="reply in replies" :comment="reply" :key="reply.id"></comment>
+      <comment v-for="reply in replies" :comment="reply" :key="reply.id" />
     </div>
   </div>
 </template>
 
 <script>
-const moment = require('moment');
+import RelativeTime from './RelativeTime.vue';
 
 export default {
   name: 'comment',
+  components: {
+    RelativeTime,
+  },
   computed: {
     replies() {
       const { replies } = this.comment;
@@ -28,9 +31,6 @@ export default {
       }
 
       return replies.children;
-    },
-    relativeTime() {
-      return moment.unix(this.comment.created_utc).fromNow();
     },
     expandoText() {
       return this.expanded ? '[-]' : '[+]';
