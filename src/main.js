@@ -3,10 +3,13 @@
 import 'semantic-ui-css/semantic.min.css';
 
 import Vue from 'vue';
+import VueMeta from 'vue-meta';
 import App from './App.vue';
 import router from './router';
 
 Vue.config.productionTip = false;
+
+Vue.use(VueMeta);
 
 /* eslint-disable no-new */
 new Vue({

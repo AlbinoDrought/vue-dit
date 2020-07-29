@@ -35,6 +35,13 @@ export default {
     id: null,
     subreddit: null,
   },
+  metaInfo() {
+    return {
+      title: this.loaded
+        ? this.post.title
+        : `Post ${this.id} on ${this.subreddit}`,
+    };
+  },
   mounted() {
     this.$root.$emit('loading', true);
     Api.getPostDetail(this.subreddit, this.id).then((data) => {

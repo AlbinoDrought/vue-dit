@@ -28,6 +28,13 @@ export default {
     subreddit: { type: String, default: '' },
     isFrontPage: { type: Boolean, default: false },
   },
+  metaInfo() {
+    return {
+      title: this.isFrontPage
+        ? 'vue-dit: random page of the internet'
+        : this.subreddit,
+    };
+  },
   methods: {
     view() {
       this.$root.$emit('loading', true);

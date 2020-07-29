@@ -28,6 +28,11 @@ export default {
   props: {
     username: { type: String, required: true },
   },
+  metaInfo() {
+    return {
+      title: `overview for ${this.username}`,
+    };
+  },
   methods: {
     view() {
       this.$root.$emit('loading', true);

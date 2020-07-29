@@ -15,6 +15,10 @@ export default {
   components: {
     HeaderMenu,
   },
+  metaInfo: {
+    title: 'Browsing',
+    titleTemplate: '%s | vue-dit',
+  },
 };
 </script>
 
