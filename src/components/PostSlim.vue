@@ -45,7 +45,7 @@ import placeholderThumbnail from '@/assets/placeholder.png';
 const moment = require('moment');
 
 export default {
-  name: 'post',
+  name: 'post-slim',
   computed: {
     hasThumbnail() {
       if (!this.post) return false;

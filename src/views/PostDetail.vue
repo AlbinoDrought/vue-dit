@@ -1,7 +1,7 @@
 <template>
   <div class="ui main container">
     <div class="ui items">
-      <post :post="post"></post>
+      <post-full :post="post" />
     </div>
 
     <div v-if="comments.length > 0" class="ui comments">
@@ -16,13 +16,13 @@
 
 <script>
 import Api from '@/api';
-import Post from '@/components/Post.vue';
+import PostFull from '@/components/PostFull.vue';
 import Comment from '@/components/Comment.vue';
 
 export default {
   components: {
     Comment,
-    Post,
+    PostFull,
   },
   data() {
     return {
