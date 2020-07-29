@@ -1,7 +1,7 @@
 <template>
   <div class="ui main container">
     <div class="ui divided relaxed items">
-      <post v-for="post in posts" :post="post" :key="post.id"></post>
+      <post-slim v-for="post in posts" :post="post" :key="post.id" :expandable="true" />
       <infinite-loading v-if="posts.length > 0" :on-infinite="onInfinite" ref="infiniteLoading" />
     </div>
   </div>
@@ -10,12 +10,12 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
 import Api from '@/api';
-import Post from '@/components/Post.vue';
+import PostSlim from '@/components/PostSlim.vue';
 
 export default {
   components: {
     InfiniteLoading,
-    Post,
+    PostSlim,
   },
   data() {
     return {

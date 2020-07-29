@@ -1,10 +1,10 @@
 <template>
   <div class="ui main container">
-    <h2 class="ui header" v-text="username"></h2>
+    <h2 class="ui header" v-text="username" />
     <div class="ui relaxed items comments">
       <template v-for="item in items">
-        <comment v-if="item.kind === 't1'" :comment="item" :key="item.id"></comment>
-        <post v-else :post="item" :key="item.id"></post>
+        <comment v-if="item.kind === 't1'" :comment="item" :key="item.id" />
+        <post-slim v-else :post="item" :key="item.id" />
       </template>
     </div>
   </div>
@@ -12,12 +12,12 @@
 
 <script>
 import Api from '@/api';
-import Post from '@/components/Post.vue';
+import PostSlim from '@/components/PostSlim.vue';
 import Comment from '@/components/Comment.vue';
 
 export default {
   components: {
-    Post,
+    PostSlim,
     Comment,
   },
   data() {

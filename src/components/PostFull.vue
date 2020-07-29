@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="post item">
       <div class="ui tiny rounded image">
         <transition name="fade" appear>
           <img :src="thumbnail">
@@ -10,16 +10,11 @@
       <a v-else class="header" :href="post.url" target="_blank" v-text="post.title"></a>
 
       <div class="meta">
-        submitted
-        <span class="time" v-text="relativeTime"></span>
-        by
-        <router-link :to="'/user/' + post.author">
-          <span class="user" v-text="post.author"></span>
-        </router-link>
-        to
-        <router-link :to="'/sub/' + post.subreddit">
-          <span class="subreddit" v-text="post.subreddit"></span>
-        </router-link>
+        <post-submission-details class="meta item" :post="post" />
+      </div>
+
+      <div class="extra" v-if="showSelfText">
+        <markdown class="ui readable segment" :markdown="post.selftext" />
       </div>
 
       <div class="extra">
@@ -33,11 +28,15 @@
 
 <script>
 import placeholderThumbnail from '@/assets/placeholder.png';
-
-const moment = require('moment');
+import Markdown from './Markdown.vue';
+import PostSubmissionDetails from './PostSubmissionDetails.vue';
 
 export default {
-  name: 'post',
+  name: 'post-full',
+  components: {
+    Markdown,
+    PostSubmissionDetails,
+  },
   computed: {
     hasThumbnail() {
       if (!this.post) return false;
@@ -51,11 +50,8 @@ export default {
         ? this.post.thumbnail
         : placeholderThumbnail;
     },
-    relativeTime() {
-      return moment.unix(this.post.created_utc).fromNow();
-    },
-    readableTime() {
-      return moment.unix(this.post.created_utc).format('MMMM Do YYYY, h:mm:ss a');
+    showSelfText() {
+      return this.post && this.post.selftext;
     },
     commentLink() {
       return `/sub/${this.post.subreddit}/${this.post.id}`;
@@ -95,6 +91,11 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style>
+.readable.segment {
+  color: black;
+}
+.ui.items > .post.item .meta > .meta.item * {
+  margin-right: 0;
+}
 </style>
