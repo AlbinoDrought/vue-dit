@@ -1,5 +1,5 @@
 <template>
-  <div class="ui main container">
+  <div class="ui main container" v-if="loaded">
     <div class="ui items">
       <post-full :post="post" />
     </div>
@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      loading: true,
+      loaded: false,
       post: {},
       comments: [],
     };
@@ -41,6 +41,7 @@ export default {
       this.post = data.post;
       this.comments = data.comments.children;
       this.$root.$emit('loading', false);
+      this.loaded = true;
     });
   },
 };
