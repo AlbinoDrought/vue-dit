@@ -12,7 +12,7 @@
     "axios": "^0.19.2",
     "cachios": "^2.2.3",
     "core-js": "^3.6.5",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "remarkable": "^2.0.1",
     "semantic-ui-css": "^2.4.1",
     "vue": "^2.6.11",
